@@ -43,20 +43,3 @@ nixos-install --no-root-password --flake 'git+https://github.com/wuvt/infra#<hos
 #or
 nixos-install --no-root-password --flake 'git+ssh://git@github.com/wuvt/infra#<hostname>'
 ```
-
-## Automation
-johnny-six on banqiao, from wuvt-ansible's `automation` role, as a
-liquidsoap stream rather than `docker run`.
-
-```sh
-# the trackman password, as a systemd EnvironmentFile: TRACKMAN_PASSWORD=...
-agenix -e secrets/am-trackman-password.age
-
-# what ALSA_OUTPUT should say
-nix-shell -p alsa-utils --run 'aplay -l'
-
-# on the host
-systemctl status johnny-six
-journalctl -fu johnny-six
-liquidsoap --client /tmp/liquidsoap.sock
-```
